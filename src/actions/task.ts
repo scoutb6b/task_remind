@@ -24,3 +24,24 @@ export const insertTask = async (state: FormState, formData: FormData) => {
   }
   redirect("/");
 };
+
+export const updateTask = async (
+  id: string,
+  state: FormState,
+  formData: FormData
+) => {
+  const updateTask: Remind = {
+    company: formData.get("company") as string,
+    startDate: formData.get("start") as string,
+    endDate: formData.get("end") as string,
+    content: formData.get("content") as string,
+  };
+  try {
+    await connectDb();
+    await RemindModel.updateOne({ _id: id }, updateTask);
+  } catch (error) {
+    state.error = "編集に失敗しました";
+    return state;
+  }
+  redirect("/");
+};
