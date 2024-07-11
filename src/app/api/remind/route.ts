@@ -1,6 +1,6 @@
 import { connectDb } from "@/lib/database";
-import { Remind, RemindDoc, RemindModel } from "@/models/remind";
-import { NextRequest, NextResponse } from "next/server";
+import { RemindDoc, RemindModel } from "@/models/remind";
+import { NextResponse } from "next/server";
 
 // READ
 export const GET = async () => {
