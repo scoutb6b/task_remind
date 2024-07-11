@@ -33,4 +33,4 @@ const remindScema = new mongoose.Schema<RemindDoc>(
 );
 
 export const RemindModel =
-  mongoose.models.Remind || mongoose.model("Remind", remindScema);
+  mongoose.models.Remind || mongoose.model("Remind", remindScema, "remind");
