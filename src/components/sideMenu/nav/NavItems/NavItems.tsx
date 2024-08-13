@@ -13,8 +13,8 @@ const NavItems: React.FC<NavItemsProps> = ({ label, href, icon }) => {
   const pathname = usePathname();
   return (
     <Link
-      className={`flex gap-1 items-center text-xl font-semibold px-6 py-4 hover:bg-sky-200 ${
-        pathname === href ? "bg-sky-300 border-r-4 border-r-pink-400" : ""
+      className={`flex gap-1 items-center text-xl font-semibold rounded-md px-6 py-4 mt-2 hover:bg-blue-300  ${
+        pathname === href ? "bg-sky-200  text-sky-600 " : ""
       }`}
       href={href}
     >

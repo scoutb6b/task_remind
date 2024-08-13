@@ -7,6 +7,7 @@ export interface Remind {
   content: string;
 }
 export interface RemindDoc extends Remind, Document {
+  _id: string;
   createdAt: Date;
   updatedAt: Date;
 }

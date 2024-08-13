@@ -46,7 +46,7 @@ export const EditForm: React.FC<EditFormProps> = ({ task }) => {
           />
         </div>
         <div className="flex flex-col mt-4 font-medium text-lg w-3/4 mx-auto">
-          <label htmlFor="">保守開始日</label>
+          <label htmlFor="">保守開始日 (例:2024-10-01)</label>
           <input
             type="text"
             name="start"
@@ -57,7 +57,7 @@ export const EditForm: React.FC<EditFormProps> = ({ task }) => {
           />
         </div>
         <div className="flex flex-col mt-4 font-medium text-lg w-3/4 mx-auto">
-          <label htmlFor="">保守終了日</label>
+          <label htmlFor="">保守終了日 (例:2025-04-10)</label>
           <input
             type="text"
             name="end"

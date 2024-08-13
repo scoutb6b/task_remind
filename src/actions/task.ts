@@ -45,3 +45,13 @@ export const updateTask = async (
   }
   redirect("/");
 };
+
+export const deleteTask = async (id: string) => {
+  try {
+    await connectDb();
+    await RemindModel.deleteOne({ _id: id });
+  } catch (error) {
+    console.error("削除に失敗しました", error);
+  }
+  redirect("/");
+};
