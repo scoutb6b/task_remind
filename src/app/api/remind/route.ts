@@ -2,7 +2,6 @@ import { connectDb } from "@/lib/database";
 import { RemindDoc, RemindModel } from "@/models/remind";
 import { NextResponse } from "next/server";
 
-// READ
 export const GET = async () => {
   try {
     await connectDb();

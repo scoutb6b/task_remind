@@ -3,7 +3,6 @@ import { RemindDoc, RemindModel } from "@/models/remind";
 import dayjs from "dayjs";
 import { NextResponse } from "next/server";
 
-// READ
 export const GET = async () => {
   try {
     await connectDb();

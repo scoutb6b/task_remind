@@ -3,12 +3,10 @@ import { RemindDoc, RemindModel } from "@/models/remind";
 import dayjs from "dayjs";
 import { NextResponse } from "next/server";
 
-// READ
 export const GET = async () => {
   try {
     await connectDb();
     const today = dayjs().format("YYYY-MM-DD");
-    console.log(today);
 
     const ExpiredRemindTasks: RemindDoc[] = await RemindModel.find({
       endDate: { $lt: today },
