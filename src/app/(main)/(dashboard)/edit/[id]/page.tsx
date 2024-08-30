@@ -1,10 +1,7 @@
 import EditForm from "@/components/main/form/EditForm";
 import { RemindDoc } from "@/models/remind";
+import { NextPage } from "next";
 import React from "react";
-
-interface Params {
-  params: { id: string };
-}
 
 const getTask = async (id: string) => {
   const res = await fetch(`${process.env.API_URL}/remind/${id}`, {
@@ -16,7 +13,7 @@ const getTask = async (id: string) => {
   return data.editRemindTask as RemindDoc;
 };
 
-const Editpage = async ({ params }: Params) => {
+const Editpage = async ({ params }: { params: { id: string } }) => {
   const id = params.id;
   const editTask = await getTask(id);
 

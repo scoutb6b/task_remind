@@ -20,13 +20,13 @@ const Nav = () => {
     },
     {
       id: 2,
-      label: "保守継続中",
+      label: "継続中",
       href: "/periodof",
       icon: <FaListCheck className="size-5" />,
     },
     {
       id: 3,
-      label: "保守期限切れ",
+      label: "期限切れ",
       href: "/expired",
       icon: <IoIosTimer className="size-5" />,
     },
