@@ -1,0 +1,10 @@
+name: reminder_schedule
+on:
+  schedule:
+    - cron: "0 0 * * *"
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Vercel API Endpoint
+        run: curl -X GET "${{process.env.NEXT_PUBLIC_API_URL}}schedule/"
