@@ -5,7 +5,9 @@ import { NextResponse } from "next/server";
 export const GET = async () => {
   try {
     await connectDb();
-    const allRemindTasks: RemindDoc[] = await RemindModel.find();
+    const allRemindTasks: RemindDoc[] = await RemindModel.find().sort({
+      endDate: 1,
+    });
     console.log(allRemindTasks);
 
     return NextResponse.json(
