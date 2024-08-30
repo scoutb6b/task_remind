@@ -15,8 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className="text-gray-800">
-      <body className={notoSansJp.className}>{children}</body>
+    <html lang="ja">
+      <body className={`${notoSansJp.className} text-gray-800`}>
+        {children}
+      </body>
     </html>
   );
 }
