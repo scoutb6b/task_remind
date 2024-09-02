@@ -10,8 +10,9 @@ export const GET = async () => {
 
     const ExpiredRemindTasks: RemindDoc[] = await RemindModel.find({
       endDate: { $lt: today },
+    }).sort({
+      endDate: 1,
     });
-    console.log(ExpiredRemindTasks);
 
     return NextResponse.json(
       { message: "取得成功", tasks: ExpiredRemindTasks },

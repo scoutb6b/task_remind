@@ -1,6 +1,6 @@
 "use client";
 
-import { FormState, updateTask } from "@/actions/task";
+import { FormState, State, updateTask } from "@/actions/task";
 import { RemindDoc } from "@/models/remind";
 import { useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
@@ -16,7 +16,8 @@ export const EditForm: React.FC<EditFormProps> = ({ task }) => {
   const [content, setContent] = useState(task.content);
 
   const updateTaskId = updateTask.bind(null, task._id);
-  const initialState: FormState = { error: "" };
+  const initialState: State = { message: null, errors: {} };
+
   const [state, formAction] = useFormState(updateTaskId, initialState);
   const SubmitBtn = () => {
     const { pending } = useFormStatus();
@@ -24,7 +25,8 @@ export const EditForm: React.FC<EditFormProps> = ({ task }) => {
       <button
         type="submit"
         disabled={pending}
-        className="mt-8 px-20 py-2 block mx-auto rounded-lg bg-pink-800 text-white shadow-md hover:shadow-none hover:opacity-75 disabled:bg-gray-400"
+        className="mt-8 px-20 py-2 block border-2 mx-auto rounded-lg bg-pink-800 text-white 
+        hover:bg-slate-50 hover:border-2 hover:border-pink-800 hover:text-pink-800 disabled:bg-gray-400 transition-all duration-500"
       >
         保存する
       </button>
@@ -33,9 +35,9 @@ export const EditForm: React.FC<EditFormProps> = ({ task }) => {
 
   return (
     <div>
-      <form className="" action={formAction}>
-        <div className="flex flex-col mt-4 font-medium text-lg w-3/4 mx-auto">
-          <label htmlFor="">会社名</label>
+      <form action={formAction}>
+        <div className="flex flex-col mt-5 mb-10 font-medium text-lg w-3/4 mx-auto ">
+          <label htmlFor="">タスク名</label>
           <input
             type="text"
             name="company"
@@ -44,9 +46,16 @@ export const EditForm: React.FC<EditFormProps> = ({ task }) => {
             onChange={(e) => setCompany(e.target.value)}
             className="mt-2 py-1 px-2 rounded-lg "
           />
+          <div id="customer-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.company?.map((error: string) => (
+              <p className="mt-2 text-sm text-red-500" key={error}>
+                {error}
+              </p>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col mt-4 font-medium text-lg w-3/4 mx-auto">
-          <label htmlFor="">保守開始日 (例:2024-10-01)</label>
+        <div className="flex flex-col mt-5 mb-10 font-medium text-lg w-3/4 mx-auto ">
+          <label htmlFor="">開始日 (例:2024-10-01)</label>
           <input
             type="text"
             name="start"
@@ -55,9 +64,16 @@ export const EditForm: React.FC<EditFormProps> = ({ task }) => {
             onChange={(e) => setStartDate(e.target.value)}
             className="mt-2 py-1 px-2 rounded-lg "
           />
+          <div id="customer-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.startDate?.map((error: string) => (
+              <p className="mt-2 text-sm text-red-500" key={error}>
+                {error}
+              </p>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col mt-4 font-medium text-lg w-3/4 mx-auto">
-          <label htmlFor="">保守終了日 (例:2025-04-10)</label>
+        <div className="flex flex-col mt-5 mb-10 font-medium text-lg w-3/4 mx-auto ">
+          <label htmlFor="">終了日 (例:2025-04-10)</label>
           <input
             type="text"
             name="end"
@@ -66,8 +82,15 @@ export const EditForm: React.FC<EditFormProps> = ({ task }) => {
             onChange={(e) => setEndDate(e.target.value)}
             className="mt-2 py-1 px-2 rounded-lg "
           />
+          <div id="customer-error" aria-live="polite" aria-atomic="true">
+            {state.errors?.endDate?.map((error: string) => (
+              <p className="mt-2 text-sm text-red-500" key={error}>
+                {error}
+              </p>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col mt-4 font-medium text-lg w-3/4 mx-auto">
+        <div className="flex flex-col mt-5 mb-10 font-medium text-lg w-3/4 mx-auto ">
           <label htmlFor="">備考</label>
           <textarea
             name="content"
@@ -78,9 +101,6 @@ export const EditForm: React.FC<EditFormProps> = ({ task }) => {
           ></textarea>
         </div>
         <SubmitBtn />
-        {state.error !== "" && (
-          <p className="mt-2 text-red-500 text-sm">{state.error}</p>
-        )}
       </form>
     </div>
   );

@@ -1,47 +1,76 @@
 "use server";
 
 import { connectDb } from "@/lib/database";
+import { formScheme } from "@/lib/zod/scheme";
 import { Remind, RemindModel } from "@/models/remind";
 import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 export interface FormState {
   error: string;
 }
-
-export const insertTask = async (state: FormState, formData: FormData) => {
-  const newTask: Remind = {
-    company: formData.get("company") as string,
-    startDate: formData.get("start") as string,
-    endDate: formData.get("end") as string,
-    content: formData.get("content") as string,
+export type State = {
+  errors?: {
+    company?: string[];
+    startDate?: string[];
+    endDate?: string[];
+    content?: string[];
   };
+  message?: string | null;
+};
+
+export const insertTask = async (prevState: State, formData: FormData) => {
+  const newTask = formScheme.safeParse({
+    company: formData.get("company"),
+    startDate: formData.get("start"),
+    endDate: formData.get("end"),
+    content: formData.get("content"),
+  });
+  if (!newTask.success) {
+    return {
+      ...prevState,
+      errors: newTask.error.flatten().fieldErrors,
+      message: "form error",
+    };
+  }
   try {
     await connectDb();
     await RemindModel.create(newTask);
   } catch (error) {
-    state.error = "作成に失敗しました";
-    return state;
+    return {
+      ...prevState,
+      message: "作成に失敗しました",
+    };
   }
   redirect("/");
 };
 
 export const updateTask = async (
   id: string,
-  state: FormState,
+  prevState: State,
   formData: FormData
 ) => {
-  const updateTask: Remind = {
-    company: formData.get("company") as string,
-    startDate: formData.get("start") as string,
-    endDate: formData.get("end") as string,
-    content: formData.get("content") as string,
-  };
+  const updateTask = formScheme.safeParse({
+    company: formData.get("company"),
+    startDate: formData.get("start"),
+    endDate: formData.get("end"),
+    content: formData.get("content"),
+  });
+  if (!updateTask.success) {
+    return {
+      ...prevState,
+      errors: updateTask.error.flatten().fieldErrors,
+      message: "form edit error",
+    };
+  }
   try {
     await connectDb();
     await RemindModel.updateOne({ _id: id }, updateTask);
   } catch (error) {
-    state.error = "編集に失敗しました";
-    return state;
+    return {
+      ...prevState,
+      message: "編集に失敗しました",
+    };
   }
   redirect("/");
 };

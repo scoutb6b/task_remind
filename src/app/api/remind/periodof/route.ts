@@ -10,8 +10,9 @@ export const GET = async () => {
 
     const PeriodofRemindTasks: RemindDoc[] = await RemindModel.find({
       endDate: { $gt: today },
+    }).sort({
+      endDate: 1,
     });
-    console.log(PeriodofRemindTasks);
 
     return NextResponse.json(
       { message: "取得成功", tasks: PeriodofRemindTasks },

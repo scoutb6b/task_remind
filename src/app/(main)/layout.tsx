@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "../globals.css";
-import Sidemenu from "@/components/sideMenu/Sidemenu";
 
 const notoSansJp = Noto_Sans_JP({ subsets: ["latin"] });
 
@@ -16,12 +15,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className="text-gray-800">
-      <body className={notoSansJp.className}>
-        <main className="flex">
-          <Sidemenu />
-          {children}
-        </main>
+    <html lang="ja">
+      <body className={`${notoSansJp.className} text-gray-800`}>
+        {children}
       </body>
     </html>
   );

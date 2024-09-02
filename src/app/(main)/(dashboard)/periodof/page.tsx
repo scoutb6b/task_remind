@@ -1,6 +1,7 @@
 import List from "@/components/main/list/List";
 import ListHeader from "@/components/main/list/ListHeader";
 import { RemindDoc } from "@/models/remind";
+import { NextPage } from "next";
 import Link from "next/link";
 import { MdPlaylistAdd } from "react-icons/md";
 
@@ -15,13 +16,13 @@ const getAll = async (): Promise<RemindDoc[]> => {
   return data.tasks as RemindDoc[];
 };
 
-const PeriodofPage = async () => {
+const PeriodofPage: NextPage = async () => {
   const allRemind = await getAll();
 
   return (
     <div className="w-full">
       <div className="flex justify-around items-center mt-6 ">
-        <div className="text-2xl font-semibold">保守期限切れ一覧</div>
+        <div className="text-2xl font-semibold">継続中一覧</div>
         <Link
           href={"/new"}
           className="flex items-center justify-center bg-gray-800 text-white  px-6 py-3 rounded-full"
