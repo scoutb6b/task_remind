@@ -14,12 +14,13 @@ export const GET = async () => {
       endDate: { $eq: lastThreeMonth },
     });
     const mailer = nodemailer.createTransport({
-      host: process.env.SMTP_SERVER,
-      port: 587,
-      secure: false,
-      tls: {
-        rejectUnauthorized: false,
-      },
+      // host: process.env.SMTP_SERVER,
+      // port: 587,
+      // secure: false,
+      // tls: {
+      //   rejectUnauthorized: false,
+      // },
+      service: "Gmail",
       auth: {
         user: process.env.SEND_NAME,
         pass: process.env.SEND_PASS,

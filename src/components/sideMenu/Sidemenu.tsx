@@ -12,7 +12,7 @@ const Sidemenu = () => {
         <h1
           className={`${murecho.className} text-2xl font-bold text-center py-10  bg-sky-700 text-white rounded-md`}
         >
-          タスク
+          task remind
         </h1>
       </Link>
       <Nav />
