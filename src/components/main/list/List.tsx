@@ -8,7 +8,7 @@ interface ListProps {
 
 const List: React.FC<ListProps> = ({ task }) => {
   return (
-    <div className="pl-4 py-4 grid grid-cols-custom gap-4 border-b-2 border-gray-300">
+    <div className="pl-4 py-4 grid grid-cols-custom gap-4 border-b-2 border-gray-300 items-center">
       <div>{task.company}</div>
       <div>{task.startDate}</div>
       <div>{task.endDate}</div>

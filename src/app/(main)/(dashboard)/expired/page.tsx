@@ -31,7 +31,7 @@ const ExpiredPage = async () => {
           <div>新規追加</div>
         </Link>
       </div>
-      <div className="my-10 mx-60">
+      <div className="mt-10 mb-20 mx-auto md:w-[95%] xl:w-[70%]">
         <ListHeader />
         {allRemind.map((item) => (
           <List key={item._id} task={item} />
