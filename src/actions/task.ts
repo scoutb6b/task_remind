@@ -35,7 +35,7 @@ export const insertTask = async (prevState: State, formData: FormData) => {
   }
   try {
     await connectDb();
-    await RemindModel.create(newTask);
+    await RemindModel.create(newTask.data);
   } catch (error) {
     return {
       ...prevState,
@@ -65,7 +65,7 @@ export const updateTask = async (
   }
   try {
     await connectDb();
-    await RemindModel.updateOne({ _id: id }, updateTask);
+    await RemindModel.updateOne({ _id: id }, updateTask.data);
   } catch (error) {
     return {
       ...prevState,
