@@ -16,7 +16,7 @@ const getAll = async (): Promise<RemindDoc[]> => {
   return data.tasks as RemindDoc[];
 };
 
-const ExpiredPage: NextPage = async () => {
+const ExpiredPage = async () => {
   const allRemind = await getAll();
 
   return (

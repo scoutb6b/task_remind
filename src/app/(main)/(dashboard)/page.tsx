@@ -16,7 +16,7 @@ const getAll = async (): Promise<RemindDoc[]> => {
   return data.tasks as RemindDoc[];
 };
 
-export const Home: NextPage = async () => {
+const Home = async () => {
   const allRemind = await getAll();
 
   return (

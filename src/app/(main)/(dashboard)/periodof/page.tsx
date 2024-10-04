@@ -16,7 +16,7 @@ const getAll = async (): Promise<RemindDoc[]> => {
   return data.tasks as RemindDoc[];
 };
 
-const PeriodofPage: NextPage = async () => {
+const PeriodofPage = async () => {
   const allRemind = await getAll();
 
   return (
