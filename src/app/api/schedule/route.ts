@@ -30,7 +30,7 @@ export const GET = async () => {
       const mailData = {
         from: process.env.SEND_NAME,
         to: process.env.TO_NAME,
-        subject: "が切れるまで3ヶ月です",
+        subject: "期限が切れるまで3ヶ月です",
         text: `${item.company} の期限が、${item.endDate} までです。終了まで3ヶ月を切りました。`,
       };
       return mailer.sendMail(mailData);
