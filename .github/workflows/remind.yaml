@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call Vercel API Endpoint
-        run: curl -X GET "${{process.env.NEXT_PUBLIC_API_URL}}/schedule/"
+        run: curl -X GET "${{env.API_URL}}/schedule/"
