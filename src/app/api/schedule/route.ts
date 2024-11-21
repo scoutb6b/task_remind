@@ -13,6 +13,9 @@ export const GET = async () => {
     const expired = await RemindModel.find({
       endDate: { $eq: lastThreeMonth },
     });
+    if (expired.length === 0) {
+      return NextResponse.json({ message: "送信対象なし" }, { status: 200 });
+    }
     const mailer = nodemailer.createTransport({
       // host: process.env.SMTP_SERVER,
       // port: 587,
@@ -20,7 +23,7 @@ export const GET = async () => {
       // tls: {
       //   rejectUnauthorized: false,
       // },
-      service: "Gmail",
+      service: "gmail",
       auth: {
         user: process.env.SEND_NAME,
         pass: process.env.SEND_PASS,
