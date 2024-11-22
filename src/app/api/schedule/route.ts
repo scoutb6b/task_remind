@@ -6,6 +6,7 @@ import nodemailer from "nodemailer";
 
 export const GET = async () => {
   try {
+    console.log("Endpoint hit");
     await connectDb();
     const today = dayjs();
     const lastThreeMonth = today.add(3, "month").format("YYYY-MM-DD");
@@ -13,6 +14,7 @@ export const GET = async () => {
     const expired = await RemindModel.find({
       endDate: { $eq: lastThreeMonth },
     });
+    console.log("Expired Tasks: ", expired);
     if (expired.length === 0) {
       return NextResponse.json({ message: "送信対象なし" }, { status: 200 });
     }
@@ -38,7 +40,8 @@ export const GET = async () => {
       };
       return mailer.sendMail(mailData);
     });
-    await Promise.all(sendAll);
+    const result = await Promise.allSettled(sendAll);
+    console.log("mail result", result);
 
     return NextResponse.json({ message: "send success" }, { status: 200 });
   } catch (error) {
