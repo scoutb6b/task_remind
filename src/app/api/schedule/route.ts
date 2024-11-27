@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-export const GET = async () => {
+export const POST = async () => {
   try {
     console.log("Endpoint hit");
     await connectDb();
